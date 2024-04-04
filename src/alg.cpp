@@ -15,8 +15,7 @@ std::string infx2pstfx(std::string inf) {
   for (char c : inf) {
     if (isalnum(c)) {
       postExp += c;
-    }
-    else if (c == '(') {
+    } else if (c == '(') {
       opStack.push(c);
     } else if (c == ')') {
       while (!opStack.isEmpty() && opStack.top() != '(') {
