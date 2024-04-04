@@ -2,7 +2,7 @@
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 #include <string>
-template<typename T, int size>
+template<typename T>
 class Tstack {
  private:
     T data[size];
@@ -23,4 +23,4 @@ class Tstack {
             throw std::string("Empty");
     }
 };
-#endif  // include_tstack_h_
+#endif  // INCLUDE_TSTACK_H_
