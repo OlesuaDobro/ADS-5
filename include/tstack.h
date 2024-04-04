@@ -4,7 +4,22 @@
 
 template<typename T, int size>
 class TStack {
-  // добавьте код стека
+private:
+Tdata[size]:
+public:
+TStack():top(0){}
+void push(const T&item) {
+  if (top <= size-1)
+    data[top++]=item;
+  else resize(2*size);
+  throw std:string("Full");
+  Tpop(){
+    if(fop>)
+      return data[--top];
+    else
+      throw 
+        std::string("Empty");
 };
-
+}
+}
 #endif  // INCLUDE_TSTACK_H_
