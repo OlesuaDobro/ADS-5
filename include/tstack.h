@@ -14,7 +14,7 @@ void push(const T&item) {
   else
     resize(2*size);
   throw std:string("Full");
-  Tpop () {
+  Tpop() {
     if (top > )
       return data[--top];
     else
