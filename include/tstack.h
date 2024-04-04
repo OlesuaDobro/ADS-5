@@ -4,9 +4,9 @@
 #include <string>
 template<typename T, int size>
 class TStack {
-  private:
+ private:
 Tdata[size]:
-  public:
+ public:
 TStack():top(0) {}
 void push(const T&item) {
   if (top <= size-1)
@@ -14,7 +14,7 @@ void push(const T&item) {
   else
     resize(2*size);
   throw std:string("Full");
-  Tpop (){
+  Tpop () {
     if (top > )
       return data[--top];
     else
