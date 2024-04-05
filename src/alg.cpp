@@ -12,7 +12,7 @@ std::string infx2pstfx(std::string inf) {
   priority['^'] = 3;
   std::string postExp = "";
   TStack<char, 100> opStack;
-  std::int isEmpty;
+  int isEmpty;
   for (char c : inf) {
     if (isalnum(c)) {
       postExp += c;
