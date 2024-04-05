@@ -14,7 +14,7 @@ int getPriority(char op) {
 }
 std::string infx2pstfx(std::string inf) {
     std::string postfix;
-    std::Tstack<char> operatorStack;
+    Tstack<char, 100> operatorStack;
     for (int i = 0; i < inf.length(); i++) {
         char c = inf[i];
         if (isdigit(c)) {
