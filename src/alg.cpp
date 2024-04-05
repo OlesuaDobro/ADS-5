@@ -3,56 +3,60 @@
 #include <map>
 #include "tstack.h"
 
+int getPriority(char op) {
+    if(op == '+' || op == '-') {
+        return 1;
+    } else if(op == '*' || op == '/') {
+        return 2;
+    } else {
+        return 0;
+    }
+}
 std::string infx2pstfx(std::string inf) {
-    std::string pst;
-    std::Tstack<char> st;
-for (int i = 0; i < inf.length(); i++) {
-        if (isdigit(inf[i]))
-            pst += inf[i];
-} else if (inf[i] == '(') {
-            st.push(inf[i]);
-} else if (inf[i] == '+' || inf[i] == '-' ||
-            inf[i] == '*' || inf[i] == '/') {
-            while (!st.empty() && st.top() != '(' && (st.top() == '*'
-                || st.top() == '/')) {
-                pst += st.top();
-                st.pop();
+    std::string postfix;
+    std::Tstack<char> operatorStack;
+    for(int i = 0; i < inf.length(); i++) {
+        char c = inf[i];
+        if(isdigit(c)) {
+            postfix += c;
+        } else if(c == '+' || c == '-' || c == '*' || c == '/') {
+            while(!operatorStack.empty() && 
+                  getPriority(operatorStack.top()) >= getPriority(c)) {
+                postfix += operatorStack.top();
+                operatorStack.pop();
             }
-            st.push(inf[i]);
-} else if (inf[i] == ')') {
-            while (!st.empty() && st.top() != '(') {
-                pst += st.top();
-                st.pop();
+            operatorStack.push(c);
+        } else if(c == '(') {
+            operatorStack.push(c);
+        } else if(c == ')') {
+            while(!operatorStack.empty() && operatorStack.top() != '(') {
+                postfix += operatorStack.top();
+                operatorStack.pop();
             }
-            if (!st.empty())
-                st.pop();
+            if(!operatorStack.empty() && operatorStack.top() == '(') {
+                operatorStack.pop();
+            }
         }
     }
-}
-    while (!st.empty()) {
-        pst += st.top();
-        st.pop();
+    while(!operatorStack.empty()) {
+        postfix += operatorStack.top();
+        operatorStack.pop();
     }
-    return pst;
+    return postfix;
 }
 int eval(std::string post) {
-    std::Tstack<int> st;
-    for (int i = 0; i < post.length(); i++) {
-        if (isdigit(post[i])) {
-            int num = 0;
-            while (i < post.length() && isdigit(post[i])) {
-                num = num * 10 + (post[i] - '0');
-                i++;
-            }
-            st.push(num);
-        } else if (post[i] == '+' || post[i] == '-'
-            || post[i] == '*' || post[i] == '/') {
-            int operand2 = st.top();
-            st.pop();
-            int operand1 = st.top();
-            st.pop();
+    std::Tstack<int> operandStack;
+    for(int i = 0; i < post.length(); i++) {
+        char c = post[i];
+        if(isdigit(c)) {
+            operandStack.push(c - '0');
+        } else if(c == '+' || c == '-' || c == '*' || c == '/') {
+            int operand2 = operandStack.top();
+            operandStack.pop();
+            int operand1 = operandStack.top();
+            operandStack.pop();
             int result;
-            switch (post[i]) {
+            switch(c) {
                 case '+':
                     result = operand1 + operand2;
                     break;
@@ -66,8 +70,8 @@ int eval(std::string post) {
                     result = operand1 / operand2;
                     break;
             }
-            st.push(result);
+            operandStack.push(result);
         }
     }
-    return st.top();
+    return operandStack.top();
 }
