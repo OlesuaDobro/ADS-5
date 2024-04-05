@@ -11,36 +11,36 @@ std::string infx2pstfx(std::string inf) {
   priority['/'] = 2;
   priority['^'] = 3;
   std::string postExp = "";
-  TStack<char, 100> opStack;
+  Tstack<char, 100> obStack;
   int isEmpty;
   for (char c : inf) {
     if (isalnum(c)) {
       postExp += c;
     } else if (c == '(') {
-      opStack.push(c);
+      obStack.push(c);
     } else if (c == ')') {
-      while (!opStack.isEmpty() && opStack.top() != '(') {
-        postExp += opStack.top();
-        opStack.pop();
+      while (!obStack.isEmpty() && obStack.top() != '(') {
+        postExp += obStack.top();
+        obStack.pop();
       }
-      opStack.pop();
+      obStack.pop();
     } else {
-      while (!opStack.isEmpty() && opStack.top() != '(' &&
-          priority[opStack.top()] >= priority[c]) {
-        postExp += opStack.top();
-        opStack.pop();
+      while (!obStack.isEmpty() && obStack.top() != '(' &&
+          priority[obStack.top()] >= priority[c]) {
+        postExp += obStack.top();
+        obStack.pop();
       }
-      opStack.push(c);
+      obStack.push(c);
     }
   }
-  while (!opStack.isEmpty()) {
-    postExp += opStack.top();
-    opStack.pop();
+  while (!obStack.isEmpty()) {
+    postExp += obStack.top();
+    obStack.pop();
   }
   return postExp;
 }
 int eval(std::string post) {
-  TStack<int, 100> numStack;
+  Tstack<int, 100> numStack;
   for (char c : post) {
     if (isdigit(c)) {
       numStack.push(c - '0');
