@@ -13,8 +13,8 @@ for (int i = 0; i < inf.length(); i++) {
             st.push(inf[i]);
 } else if (inf[i] == '+' || inf[i] == '-' ||
             inf[i] == '*' || inf[i] == '/') {
-            while (!st.empty() && st.top() != '(' && (st.top() == '*' || st.top() == '/'))
-            {
+            while (!st.empty() && st.top() != '(' && (st.top() == '*' 
+                || st.top() == '/')) {
                 pst += st.top();
                 st.pop();
             }
@@ -45,7 +45,8 @@ int eval(std::string post) {
                 i++;
             }
             st.push(num);
-        } else if (post[i] == '+' || post[i] == '-' || post[i] == '*' || post[i] == '/') {
+        } else if (post[i] == '+' || post[i] == '-' 
+            || post[i] == '*' || post[i] == '/') {
             int operand2 = st.top();
             st.pop();
             int operand1 = st.top();
