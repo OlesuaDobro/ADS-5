@@ -4,21 +4,29 @@
 #include "tstack.h"
 
 int getPriority(char op) {
-    if (op == '+' || op == '-') {
-        return 1;
-    } else if (op == '*' || op == '/') {
-        return 2;
-    } else {
-        return 0;
-    }
+switch(c) {
+                case '+':
+                    result = operand1 + operand2;
+                    break;
+                case '-':
+                    result = operand1 - operand2;
+                    break;
+                case '*':
+                    result = operand1 * operand2;
+                    break;
+                case '/':
+                    result = operand1 / operand2;
+                    break;
+            }
 }
 std::string infx2pstfx(std::string inf) {
-    string postfix;
-    Tstack<char, 100> operatorStack;
+   std::string postfix;
+    Tstack<char, 100>stack1;
     for (int i = 0; i < inf.length(); i++) {
         char c = inf[i];
         if (isdigit(c)) {
             postfix += c;
+            postfix += ' ';
         } else if (c == '+' || c == '-' || c == '*' || c == '/') {
             while (!operatorStack.empty() &&
                   getPriority(operatorStack.top()) >= getPriority(c)) {
@@ -45,16 +53,16 @@ std::string infx2pstfx(std::string inf) {
     return postfix;
 }
 int eval(std::string post) {
-    Tstack<int, 100> operandStack;
+    Tstack<int, 100> stack1;
     for (int i = 0; i < post.length(); i++) {
         char c = post[i];
         if (isdigit(c)) {
-            operandStack.push(c - '0');
+            stack1.push(c - '0');
         } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-            int operand2 = operandStack.top();
-            operandStack.pop();
-            int operand1 = operandStack.top();
-            operandStack.pop();
+            int operand2 = stack1.top();
+            stack1.pop();
+            int operand1 = stack1.top();
+            stack1.pop();
             int result;
             switch (c) {
                 case '+':
@@ -70,8 +78,8 @@ int eval(std::string post) {
                     result = operand1 / operand2;
                     break;
             }
-            operandStack.push(result);
+            stack1.push(result);
         }
     }
-    return operandStack.top();
+    return stack1.top();
 }
