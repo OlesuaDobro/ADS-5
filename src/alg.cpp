@@ -19,6 +19,8 @@ std::string infx2pstfx(std::string inf) {
     } else if (c == '(') {
       obStack.push(c);
     } else if (c == ')') {
+       } else {
+    throw "Unknown symbol";
       while (!obStack.isEmpty() && obStack.top() != '(') {
         postExp += obStack.top();
         obStack.pop();
