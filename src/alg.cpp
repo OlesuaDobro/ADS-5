@@ -11,7 +11,7 @@ std::string infx2pstfx(std::string inf) {
   priority['/'] = 2;
   priority['^'] = 3;
   std::string postExp = "";
-  TStack<char> opStack;
+  TStack<char, 100> opStack;
   for (char c : inf) {
     if (isalnum(c)) {
       postExp += c;
@@ -39,7 +39,7 @@ std::string infx2pstfx(std::string inf) {
   return postExp;
 }
 int eval(std::string post) {
-  TStack<int> numStack;
+  TStack<int, 100> numStack;
   for (char c : post) {
     if (isdigit(c)) {
       numStack.push(c - '0');
