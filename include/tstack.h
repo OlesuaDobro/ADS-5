@@ -3,19 +3,19 @@
 #define INCLUDE_TSTACK_H_
 #include <string>
 template<typename T, int size>
-class Tstack {
+class TStack {
  private:
 const int Ksize = size;
     T data[100];
     int top;
  public:
-    Tstack(): top(0) {}
-    void push(const t& item) {
+    TStack(): top(0) {}
+    void push(const T& item) {
         if (top <= size-1)
             data[top++] = item;
         else
             resize(2*size);
-     throw std:string("Full");
+     throw std::string("Full");
     }
     T pop() {
         if (top > 0)
