@@ -20,8 +20,8 @@ std::string infx2pstfx(std::string inf) {
         if (isdigit(c)) {
             postfix += c;
         } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-            while (!operatorStack.empty() && 
-                  getPriority (operatorStack.top()) >= getPriority(c)) {
+            while (!operatorStack.empty() &&
+                  getPriority(operatorStack.top()) >= getPriority(c)) {
                 postfix += operatorStack.top();
                 operatorStack.pop();
             }
@@ -44,13 +44,13 @@ std::string infx2pstfx(std::string inf) {
     }
     return postfix;
 }
-int eval (std::string post) {
+int eval(std::string post) {
     std::Tstack<int> operandStack;
     for (int i = 0; i < post.length(); i++) {
         char c = post[i];
         if (isdigit(c)) {
             operandStack.push(c - '0');
-        } else if(c == '+' || c == '-' || c == '*' || c == '/') {
+        } else if (c == '+' || c == '-' || c == '*' || c == '/') {
             int operand2 = operandStack.top();
             operandStack.pop();
             int operand1 = operandStack.top();
