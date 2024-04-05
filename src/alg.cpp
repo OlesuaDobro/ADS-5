@@ -4,71 +4,69 @@
 #include "tstack.h"
 
 std::string infx2pstfx(std::string inf) {
-  std::map<char, int> priority;
-  priority['+'] = 1;
-  priority['-'] = 1;
-  priority['*'] = 2;
-  priority['/'] = 2;
-  priority['^'] = 3;
-  std::string postExp = "";
-  Tstack<char, 100> obStack;
-  int isEmpty;
-  for (char c : inf) {
-    if (isalnum(c)) {
-      postExp += c;
-    } else if (c == '(') {
-      obStack.push(c);
-    } else if (c == ')') {
-       } else {
-    throw "Unknown symbol";
-      while (!obStack.isEmpty() && obStack.top() != '(') {
-        postExp += obStack.top();
-        obStack.pop();
-      }
-      obStack.pop();
-    } else {
-      while (!obStack.isEmpty() && obStack.top() != '(' &&
-          priority[obStack.top()] >= priority[c]) {
-        postExp += obStack.top();
-        obStack.pop();
-      }
-      obStack.push(c);
+    std::string pst;
+    std::Tstack<char> st;
+for (int i = 0; i < inf.length(); i++) {
+        if (isdigit(inf[i]))
+            pst += inf[i];
+        else if (inf[i] == '(')
+            st.push(inf[i]);
+        else if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/') {
+            while (!st.empty() && st.top() != '(' && (st.top() == '*' || st.top() == '/'))
+            {
+                pst += st.top();
+                st.pop();
+            }
+            st.push(inf[i]);
+        }
+        else if (inf[i] == ')') {
+            while (!st.empty() && st.top() != '(') {
+                pst += st.top();
+                st.pop();
+            }
+            if (!st.empty())
+                st.pop();
+        }
     }
-  }
-  while (!obStack.isEmpty()) {
-    postExp += obStack.top();
-    obStack.pop();
-  }
-  return postExp;
+    while (!st.empty()) {
+        pst += st.top();
+        st.pop();
+    }
+    return pst;
 }
 int eval(std::string post) {
-  Tstack<int, 100> numStack;
-  for (char c : post) {
-    if (isdigit(c)) {
-      numStack.push(c - '0');
-    } else {
-      int num2 = numStack.top();
-      numStack.pop();
-      int num1 = numStack.top();
-      numStack.pop();
-      switch (c) {
-      case '+':
-        numStack.push(num1 + num2);
-        break;
-      case '-':
-        numStack.push(num1 - num2);
-        break;
-      case '*':
-        numStack.push(num1 * num2);
-        break;
-      case '/':
-        numStack.push(num1 / num2);
-        break;
-      case '^':
-        numStack.push(pow(num1, num2));
-        break;
-      }
+    std::Tstack<int> st;
+    for (int i = 0; i < post.length(); i++) {
+        if (isdigit(post[i])) {
+            int num = 0;
+            while (i < post.length() && isdigit(post[i])) {
+                num = num * 10 + (post[i] - '0');
+                i++;
+            }
+            st.push(num);
+        }
+        else if (post[i] == '+' || post[i] == '-' || post[i] == '*' || post[i] == '/') {
+            int operand2 = st.top();
+            st.pop();
+            int operand1 = st.top();
+            st.pop();
+            int result;
+            switch (post[i]) {
+                case '+':
+                    result = operand1 + operand2;
+                    break;
+                case '-':
+                    result = operand1 - operand2;
+                    break;
+                case '*':
+                    result = operand1 * operand2;
+                    break;
+                case '/':
+                    result = operand1 / operand2;
+                    break;
+            }
+            st.push(result);
+        }
     }
-  }
-  return numStack.top();
+    return st.top();
 }
