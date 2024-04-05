@@ -20,7 +20,7 @@ switch(c) {
             }
 }
 std::string infx2pstfx(std::string inf) {
-   std::string postfix;
+  std::string postfix;
     Tstack<char, 100>stack1;
     for (int i = 0; i < inf.length(); i++) {
         char c = inf[i];
