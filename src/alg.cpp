@@ -9,17 +9,17 @@ std::string infx2pstfx(std::string inf) {
 for (int i = 0; i < inf.length(); i++) {
         if (isdigit(inf[i]))
             pst += inf[i];
-        else if (inf[i] == '(')
+} else if (inf[i] == '(') {
             st.push(inf[i]);
-        else if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/') {
+} else if (inf[i] == '+' || inf[i] == '-' ||
+            inf[i] == '*' || inf[i] == '/') {
             while (!st.empty() && st.top() != '(' && (st.top() == '*' || st.top() == '/'))
             {
                 pst += st.top();
                 st.pop();
             }
             st.push(inf[i]);
-        }
-        else if (inf[i] == ')') {
+} else if (inf[i] == ')') {
             while (!st.empty() && st.top() != '(') {
                 pst += st.top();
                 st.pop();
@@ -28,6 +28,7 @@ for (int i = 0; i < inf.length(); i++) {
                 st.pop();
         }
     }
+}
     while (!st.empty()) {
         pst += st.top();
         st.pop();
@@ -44,8 +45,7 @@ int eval(std::string post) {
                 i++;
             }
             st.push(num);
-        }
-        else if (post[i] == '+' || post[i] == '-' || post[i] == '*' || post[i] == '/') {
+        } else if (post[i] == '+' || post[i] == '-' || post[i] == '*' || post[i] == '/') {
             int operand2 = st.top();
             st.pop();
             int operand1 = st.top();
