@@ -25,7 +25,7 @@ bool isEmpty() {
         return top == size - 1;
     }
     T pop() {
-        if (top > 0)
+        if (top > 0) {
             return data[--top];
     } else {
             throw std::string("Empty");
