@@ -4,14 +4,14 @@
 #include <string>
 
 template<typename T, int size>
-class Tstack {
+class TStack {
  private:
     const int Ksize = size;
     T data[100];
     int top;
 
  public:
-    Tstack(): top(0) {}
+    TStack(): top(0) {}
     T get() {
      if (!isEmpty()) {
             return data[top - 1];
@@ -39,6 +39,6 @@ bool isEmpty() {
             throw std::string("Full");
         }
     }
-Tstack<char, 100> stack1;
-Tstack<int, 100> stack2;
+TStack<char, 100> stack1;
+TStack<int, 100> stack2;
 #endif  // INCLUDE_TSTACK_H_
