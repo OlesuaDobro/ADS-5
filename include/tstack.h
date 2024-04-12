@@ -8,21 +8,16 @@ class Tstack {
     const int Ksize = size;
     T data[100];
     int top;
+
  public:
     Tstack(): top(0) {}
-T get() {
- if (!isEmpty()) {
+    T get() {
+     if (!isEmpty()) {
             return arr[top - 1];
         } else {
             throw std::string("Empty");
         }
-}
-    void push(const T& item) {
-        if (top <= size)
-            data[top++] = item;
-        else
-            throw std::string("Full");
-    }
+}        
  bool isEmpty() {
         return top == 0;
     }
@@ -32,7 +27,7 @@ T get() {
     T pop() {
         if (top > 0)
             return data[--top];
-        else
+    } else {
             throw std::string("Empty");
     }
 }
