@@ -2,10 +2,11 @@
 #include <string>
 #include <map>
 #include "tstack.h"
+#include "alg.h"
 
 std::string infx2pstfx(std::string inf) {
   std::string postfix;
-    Tstack<char, 100>stack1;
+    TStack<char, 100>stack1;
     for (int i = 0; i < inf.length(); i++) {
       if (inf[i] == '(') {
         stack1.push(inf[i]);
@@ -74,7 +75,7 @@ std::string infx2pstfx(std::string inf) {
     }
 }
 int eval(std::string post) {
-    Tstack<int, 100> stack2;
+    TStack<int, 100> stack2;
     for (int i = 0; i < pref.length(); i++) {
         if ((pref[i] >= '0') && (pref[i] <= '9')) {
             stack2.push(pref[i] - '0');
