@@ -95,7 +95,7 @@ int eval(std::string pref) {
         } else if (pref[i] != ' ' || (pref[i] < '0') && (pref[i] > '9')) {
             int operand2 = stack2.pop();
             int operand1 = stack2.pop();
-            switch (pref(i)) {
+            switch (pref[i]) {
                 case '+':
                     stack2.push(operand1 + operand2);
                     break;
