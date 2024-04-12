@@ -6,6 +6,7 @@
 
 std::string infx2pstfx(std::string inf) {
     TStack<char, 100>stack1;
+    std::string postfix;
     for (int i = 0; i < inf.length(); i++) {
       if (inf[i] == '(') {
         stack1.push(inf[i]);
