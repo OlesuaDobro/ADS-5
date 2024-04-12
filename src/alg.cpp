@@ -22,7 +22,7 @@ std::string infx2pstfx(std::string inf) {
           stack1.pop();
               }
         } else if (inf[i] == '+' || inf[i] == '-') {
-            if (!stack1.isEmpty()) {
+if (!stack1.isEmpty()) {
                 switch (stack1.get()) {
                     case '*': {
                         postfix += '*';
@@ -47,27 +47,28 @@ std::string infx2pstfx(std::string inf) {
                         postfix += ' ';
           stack1.push(inf[i]);
                     }
-        } else if (inf[i] == '*' || inf[i] == '/') {
-        if (!stack1.isEmpty()) {
-          switch (stack1.get()) {
-          case '*': {
-                postfix += '*';
-                postfix += ' ';
-                stack1.pop;
-                break;
-        }
-          case '/': {
-                postfix += '/';
-                postfix += ' ';
-                stack1.pop();
-                break;
-          }
-        }
-        } else {
-                stack1.push(inf[i]);
-            }
-        }
-    }
+                } else if (inf[i] == '*' || inf[i] == '/') {
+                  if (!stack1.isEmpty()) {
+                    switch (stack1.get()) {
+                      case '*': {
+                        postfix += '*';
+                        postfix += ' ';
+                        stack1.pop;
+                        break;
+                      }
+                      case '/': {
+                        postfix += '/';
+                        postfix += ' ';
+                        stack1.pop();
+                        break;
+                      }
+                    }
+                    stack1.push(inf[i]);
+                  } else {
+                    stack1.push(inf[i]);
+                  }
+                }
+}
     if (!stack1.isEmpty()) {
       while (!stack1.isEmpty()) {
       postfix += stack1.pop();
