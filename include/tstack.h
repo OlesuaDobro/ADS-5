@@ -13,7 +13,7 @@ class Tstack {
     Tstack(): top(0) {}
     T get() {
      if (!isEmpty()) {
-            return arr[top - 1];
+            return data[top - 1];
         } else {
             throw std::string("Empty");
         }
@@ -33,7 +33,7 @@ bool isEmpty() {
 }
     void push(const T& item) {
         if (top <= size - 1) {
-            arr[top++] = item;
+            data[top++] = item;
         } else {
             throw std::string("Full");
         }
