@@ -28,43 +28,38 @@ std::string infx2pstfx(std::string inf) {
             postfix += c;
             postfix += ' ';
         } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-            while (!operatorStack.empty() &&
-                  getPriority(operatorStack.top()) >= getPriority(c)) {
-                postfix += operatorStack.top();
-                operatorStack.pop();
+            while (!stack2.empty() &&
+                  getPriority(stack2.top()) >= getPriority(c)) {
+                postfix += stack2.top();
+                stack2.pop();
             }
-            operatorStack.push(c);
+            stack2.push(c);
         } else if (c == '(') {
-            operatorStack.push(c);
+            stack2.push(c);
         } else if (c == ')') {
-            while (!operatorStack.empty() && operatorStack.top() != '(') {
-                postfix += operatorStack.top();
-                operatorStack.pop();
+            while (!stack2.empty() && stack2.top() != '(') {
+                postfix += stack2.top();
+                stack2.pop();
             }
-            if (!operatorStack.empty() && operatorStack.top() == '(') {
-                operatorStack.pop();
+            if (!stack2.empty() && stack2.top() == '(') {
+                stack2.pop();
             }
         }
     }
-    while (!operatorStack.empty()) {
-        postfix += operatorStack.top();
-        operatorStack.pop();
+    while (!stack2.empty()) {
+        postfix += stack2.top();
+        stack2.pop();
     }
     return postfix;
 }
 int eval(std::string post) {
-    Tstack<int, 100> stack1;
-    for (int i = 0; i < post.length(); i++) {
-        char c = post[i];
-        if (isdigit(c)) {
-            stack1.push(c - '0');
-        } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-            int operand2 = stack1.top();
-            stack1.pop();
-            int operand1 = stack1.top();
-            stack1.pop();
-            int result;
-            switch (c) {
+    Tstack<int, 100> stack2;
+    for (int i = 0; i < pref.length(); i++) {
+        if ((pref[i] >= '0') && (pref[i] <= '9')) {
+            stack2.push(pref[i] - '0');
+            int operand2 = stack2.top();
+            int operand1 = stack2.top();
+            switch (pref(i)) {
                 case '+':
                     result = operand1 + operand2;
                     break;
@@ -78,8 +73,7 @@ int eval(std::string post) {
                     result = operand1 / operand2;
                     break;
             }
-            stack1.push(result);
         }
     }
-    return stack1.top();
+    return stack2.get();
 }
