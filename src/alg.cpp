@@ -46,12 +46,12 @@ std::string infx2pstfx(std::string inf) {
                         postfix += '-';
                         postfix += ' ';
           stack1.push(inf[i]);
-        }
+                    }
         } else if (inf[i] == '*' || inf[i] == '/') {
         if (!stack1.isEmpty()) {
           switch (stack1.get()) {
           case '*': {
-                postfix += '*'
+                postfix += '*';
                 postfix += ' ';
                 stack1.pop;
                 break;
@@ -68,8 +68,8 @@ std::string infx2pstfx(std::string inf) {
             }
         }
     }
-    if (!stack1.empty()) {
-      while (!stack1.empty()) {
+    if (!stack1.isEmpty()) {
+      while (!stack1.isEmpty()) {
       postfix += stack1.pop();
         postfix += ' ';
     }
@@ -83,16 +83,16 @@ int eval(std::string post) {
             int operand1 = stack2.top();
             switch (pref(i)) {
                 case '+':
-                    result = operand1 + operand2;
+                    stack2.push(operand1 + operand2);
                     break;
                 case '-':
-                    result = operand1 - operand2;
+                    stack2.push(operand1 - operand2);
                     break;
                 case '*':
-                    result = operand1 * operand2;
+                    stack2.push(operand1 * operand2);
                     break;
                 case '/':
-                    result = operand1 / operand2;
+                    stack2.push(operand1 / operand2);
                     break;
             }
         }
