@@ -17,8 +17,8 @@ class Tstack {
         } else {
             throw std::string("Empty");
         }
-}        
- bool isEmpty() {
+}
+bool isEmpty() {
         return top == 0;
     }
     bool isFull() {
@@ -37,7 +37,7 @@ class Tstack {
         } else {
             throw std::string("Full");
         }
-};
+    }
 Tstack<char, 100> stack1;
 Tstack<int, 100> stack2;
 #endif  // INCLUDE_TSTACK_H_
