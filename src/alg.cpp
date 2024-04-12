@@ -5,7 +5,6 @@
 #include "alg.h"
 
 std::string infx2pstfx(std::string inf) {
-  std::string postfix;
     TStack<char, 100>stack1;
     for (int i = 0; i < inf.length(); i++) {
       if (inf[i] == '(') {
@@ -45,30 +44,36 @@ if (!stack1.isEmpty()) {
                     case '-': {
                         postfix += '-';
                         postfix += ' ';
-          stack1.push(inf[i]);
-                    }
-                } else if (inf[i] == '*' || inf[i] == '/') {
-                  if (!stack1.isEmpty()) {
-                    switch (stack1.get()) {
-                      case '*': {
-                        postfix += '*';
-                        postfix += ' ';
-                        stack1.pop;
+                      stack1.pop();
                         break;
-                      }
-                      case '/': {
-                        postfix += '/';
-                        postfix += ' ';
-                        stack1.pop();
-                        break;
-                      }
                     }
-                    stack1.push(inf[i]);
-                  } else {
-                    stack1.push(inf[i]);
-                  }
                 }
+          stack1.push(inf[i]);
+} else {
+  stack1.push(inf[i]);
 }
+      } else if (inf[i] == '*' || inf[i] == '/') {
+        if (!stack1.isEmpty()) {
+          switch (stack1.get()) {
+            case '*': {
+              postfix += '*';
+              postfix += ' ';
+              stack1.pop;
+              break;
+            }
+            case '/': {
+              postfix += '/';
+              postfix += ' ';
+              stack1.pop();
+              break;
+            }
+          }
+          stack1.push(inf[i]);
+        } else {
+          stack1.push(inf[i]);
+        }
+      }
+    }
     if (!stack1.isEmpty()) {
       while (!stack1.isEmpty()) {
       postfix += stack1.pop();
