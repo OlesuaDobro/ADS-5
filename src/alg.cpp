@@ -3,22 +3,6 @@
 #include <map>
 #include "tstack.h"
 
-int getPriority(char op) {
-switch(c) {
-                case '+':
-                    result = operand1 + operand2;
-                    break;
-                case '-':
-                    result = operand1 - operand2;
-                    break;
-                case '*':
-                    result = operand1 * operand2;
-                    break;
-                case '/':
-                    result = operand1 / operand2;
-                    break;
-            }
-}
 std::string infx2pstfx(std::string inf) {
   std::string postfix;
     Tstack<char, 100>stack1;
@@ -62,7 +46,7 @@ std::string infx2pstfx(std::string inf) {
                         postfix += ' ';
           stack1.push(inf[i]);
         }
-        } else if (inf {i} == '*' || inf[i] == '/') {
+        } else if (inf [i] == '*' || inf[i] == '/') {
         if (!stack1.isEmpty()) {
           switch (stack1.get()) {
           case '*': {
