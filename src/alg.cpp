@@ -23,14 +23,13 @@ std::string infx2pstfx(std::string inf) {
   std::string postfix;
     Tstack<char, 100>stack1;
     for (int i = 0; i < inf.length(); i++) {
-
       if (inf[i] == '(') {
         stack1.push(inf[i]);
       } else if ((inf[i] >= '0') && (inf[i] <= '9')) {
         postfix += inf[i];
         postfix += ' ';
       } else if (inf[i] == ')') {
-        while ((!stack1.isEmpty()) && (stack1.get() != '(")) {
+        while ((!stack1.isEmpty()) && (stack1.get() != '(')) {
           postfix += stack1.pop();
           postfix += ' ';
       }
@@ -63,7 +62,7 @@ std::string infx2pstfx(std::string inf) {
                         postfix += ' ';
           stack1.push(inf[i]);
         }
-        } else if (inf{i} == '*' || inf[i] == '/') {
+        } else if (inf {i} == '*' || inf[i] == '/') {
         if (!stack1.isEmpty()) {
           switch (stack1.get()) {
           case '*': {
