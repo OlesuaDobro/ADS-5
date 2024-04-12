@@ -46,7 +46,7 @@ std::string infx2pstfx(std::string inf) {
                         postfix += ' ';
           stack1.push(inf[i]);
         }
-        } else if (inf [i] == '*' || inf[i] == '/') {
+        } else if (inf[i] == '*' || inf[i] == '/') {
         if (!stack1.isEmpty()) {
           switch (stack1.get()) {
           case '*': {
