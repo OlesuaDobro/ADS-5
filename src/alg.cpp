@@ -59,7 +59,7 @@ if (!stack1.isEmpty()) {
             case '*': {
               postfix += '*';
               postfix += ' ';
-              stack1.pop;
+              stack1.pop();
               break;
             }
             case '/': {
