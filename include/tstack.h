@@ -39,6 +39,6 @@ bool isEmpty() {
             throw std::string("Full");
         }
     }
-TStack<char, 100> stack1;
-TStack<int, 100> stack2;
+};
+
 #endif  // INCLUDE_TSTACK_H_
