@@ -23,34 +23,72 @@ std::string infx2pstfx(std::string inf) {
   std::string postfix;
     Tstack<char, 100>stack1;
     for (int i = 0; i < inf.length(); i++) {
-        char c = inf[i];
-        if (isdigit(c)) {
-            postfix += c;
-            postfix += ' ';
-        } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-            while (!stack2.empty() &&
-                  getPriority(stack2.top()) >= getPriority(c)) {
-                postfix += stack2.top();
-                stack2.pop();
-            }
-            stack2.push(c);
-        } else if (c == '(') {
-            stack2.push(c);
-        } else if (c == ')') {
-            while (!stack2.empty() && stack2.top() != '(') {
-                postfix += stack2.top();
-                stack2.pop();
-            }
-            if (!stack2.empty() && stack2.top() == '(') {
-                stack2.pop();
+
+      if (inf[i] == '(') {
+        stack1.push(inf[i]);
+      } else if ((inf[i] >= '0') && (inf[i] <= '9')) {
+        postfix += inf[i];
+        postfix += ' ';
+      } else if (inf[i] == ')') {
+        while ((!stack1.isEmpty()) && (stack1.get() != '(")) {
+          postfix += stack1.pop();
+          postfix += ' ';
+      }
+        if (stack1.get() == '(') {
+          stack1.pop();
+              }
+        } else if (inf[i] == '+' || inf[i] == '-') {
+            if (!stack1.isEmpty()) {
+                switch (stack1.get()) {
+                    case '*': {
+                        postfix += '*';
+                        postfix += ' ';
+                        stack1.pop();
+                        break;
+                    }
+                    case '/': {
+                        postfix += '/';
+                        postfix += ' ';
+                        stack1.pop();
+                        break;
+                    }
+                    case '+': {
+                        postfix += '+';
+                        postfix += ' ';
+                        stack1.pop();
+                        break;
+                    }
+                    case '-': {
+                        postfix += '-';
+                        postfix += ' ';
+          stack1.push(inf[i]);
+        }
+        } else if (inf{i} == '*' || inf[i] == '/') {
+        if (!stack1.isEmpty()) {
+          switch (stack1.get()) {
+          case '*': {
+                postfix += '*'
+                postfix += ' ';
+                stack1.pop;
+                break;
+        }
+          case '/': {
+                postfix += '/';
+                postfix += ' ';
+                stack1.pop();
+                break;
+          }
+        }
+        } else {
+                stack1.push(inf[i]);
             }
         }
     }
-    while (!stack2.empty()) {
-        postfix += stack2.top();
-        stack2.pop();
+    if (!stack1.empty()) {
+      while (!stack1.empty()) {
+      postfix += stack1.pop();
+        postfix += ' ';
     }
-    return postfix;
 }
 int eval(std::string post) {
     Tstack<int, 100> stack2;
